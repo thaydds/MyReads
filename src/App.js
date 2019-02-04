@@ -4,7 +4,8 @@ import BookSearch from './BookSearch'
 import {
   Container,
   Image,
-  Menu
+  Menu,
+  Icon
 } from 'semantic-ui-react'
 import * as BooksAPI from './BooksAPI'
 import { Route, Link } from 'react-router-dom'
@@ -60,11 +61,13 @@ class App extends Component {
       <div>
         <Menu fixed='top' inverted>
         <Container>
-        <Menu.Item as='a' header>
+        <Menu.Item header>
           <Image size='mini' src='/favicon.ico' style={{ marginRight: '1.5em' }} />
           <Link to="/">MyReads</Link>
           </Menu.Item>
-          <Menu.Item as='a' position='right'><Link to="/search">Search</Link></Menu.Item>
+          <Menu.Item position='right'>
+            <Link to="/search">Search</Link>
+          </Menu.Item>
         </Container>
         </Menu>
         {this.state.books === undefined ? ''
@@ -83,7 +86,7 @@ class App extends Component {
           </Route>
       }
       <Route exact path='/search' render={() => (
-            <BookSearch />
+            <BookSearch searchBook={this.searchBook} />
           )}>
           </Route>
       </div>

@@ -30,7 +30,9 @@ const BookCard = (props) => {
           <Image style={{width:100, height: 160}} floated='left' src={props.book.imageLinks.smallThumbnail} />
           <Card.Meta  style={{fontSize: 14}}>
               <Header as='h5'>Authors:</Header>
-              {props.book.authors.map( author => {
+              {props.book.authors === undefined ?
+              'not found':
+                props.book.authors.map( author => {
                   return author
               })}
           </Card.Meta>
