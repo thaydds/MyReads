@@ -11,6 +11,8 @@ import BookCard from './BookCard';
 
 class BookList extends Component {
     updateBook = ( book, shelf) => {
+        console.log('book', book);
+        console.log('shelf', shelf)
         this.props.updateBook(book, shelf)
     }
     render() {
