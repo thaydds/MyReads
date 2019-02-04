@@ -3,6 +3,22 @@ import {Card, Image, Button, Rating, Header, Icon, Dropdown} from 'semantic-ui-r
 import PropTypes from 'prop-types'
 import { Twitter } from 'react-social-sharing'
 
+const sharing = (msg, socialMedia) =>{ 
+  let finalUrl;
+
+  console.log('msg', msg);
+
+  if( socialMedia === 'twitter'){
+  finalUrl = `https://twitter.com/intent/tweet/?text=${msg.split(' ').join('%20')}&url=http%3A%2F%2Fhttp://sharingbuttons.io` 
+  }
+  else if( socialMedia === 'telegram') {
+  finalUrl = `https://telegram.me/share/url?text=${msg.split(' ').join('+')}&url=http%3A%2F%2Fsharingbuttons.io`
+  }
+  else{
+  finalUrl = 'https://plus.google.com/share?url=http%3A%2F%2Fsharingbuttons.io'
+  }
+  window.open(finalUrl, sharing);
+}
 
 const BookCard = (props) => {
     return(
@@ -40,8 +56,8 @@ const BookCard = (props) => {
             <Dropdown.Menu>
               <Dropdown.Header content='Social Media' />
               <Dropdown.Divider />
-              <Dropdown.Item content={<Twitter solidcircle medium message="I am so cool" link="http://sharingbuttons.io"/>} icon='facebook square'  text='Facebook' />
-              <Dropdown.Item icon='twitter square' text='Twitter' />
+              <Dropdown.Item onClick={(e, { value }) => sharing(`I ${props.book.shelf} ${props.book.title}`, value)} value='telegram' icon='telegram'  text='Telegram' />
+              <Dropdown.Item onClick={(e, { value }) => sharing(`I ${props.book.shelf} ${props.book.title}`, value)} value='twitter' icon='twitter square' text='Twitter' />
               <Dropdown.Item icon='google plus square' text='Google' />
             </Dropdown.Menu>
           </Dropdown>
