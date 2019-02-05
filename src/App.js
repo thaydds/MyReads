@@ -4,8 +4,7 @@ import BookSearch from './BookSearch'
 import {
   Container,
   Image,
-  Menu,
-  Icon
+  Menu
 } from 'semantic-ui-react'
 import * as BooksAPI from './BooksAPI'
 import { Route, Link } from 'react-router-dom'
@@ -26,23 +25,20 @@ class App extends Component {
   }
 
   updateBookList = (book, shelf) => {
-    console.log('entreiii')
     BooksAPI.update(book, shelf)
       .then(() => {
         book.shelf = shelf;
-        console.log('shelff', book.shelf);
         this.setState({books: this.state.books})
-        console.log('books', this.state.books);
       })
   }
 
   updateBookList2 = (book, shelf) => {
-    console.log('entreiii')
     BooksAPI.update(book, shelf)
       .then(() => {
-        book.shelf = shelf;
-        console.log('shelff', book.shelf);
-        this.setState((prevState)=>({books: [...this.state.books, book]})
+        console.log('before', book.shelf);
+        const book2 = Object.assign({shelf:shelf}, book);
+        console.log('after', book2.shelf)
+        this.setState(()=>({books: [...this.state.books, book2]})
 )        
       })
   }
@@ -100,7 +96,7 @@ class App extends Component {
           </Route>
       }
       <Route exact path='/search' render={() => (
-            <BookSearch teste = {this.updateBookList2} searchBook={this.searchBook} />
+            <BookSearch bookList={this.state.books} teste = {this.updateBookList2} searchBook={this.searchBook} />
           )}>
           </Route>
       </div>

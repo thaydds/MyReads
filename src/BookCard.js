@@ -1,13 +1,9 @@
 import React from 'react'
-import {Card, Image, Button, Rating, Header, Icon, Dropdown} from 'semantic-ui-react'
+import {Card, Image, Rating, Header, Dropdown} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
-import { Twitter } from 'react-social-sharing'
 
 const sharing = (msg, socialMedia) =>{ 
   let finalUrl;
-
-  console.log('msg', msg);
-
   if( socialMedia === 'twitter'){
   finalUrl = `https://twitter.com/intent/tweet/?text=${msg.split(' ').join('%20')}&url=http%3A%2F%2Fhttp://sharingbuttons.io` 
   }
@@ -27,7 +23,8 @@ const BookCard = (props) => {
           <Card.Header textAlign='center'  style={{ marginBottom : '0.7em', height: 20, fontSize: 15  }}>{props.book.title}</Card.Header>
         </Card.Content>
         <Card.Content>
-          <Image style={{width:100, height: 160}} floated='left' src={props.book.imageLinks.smallThumbnail} />
+          {props.book.imageLinks.smallThumbnail === undefined ? '' : <Image style={{width:100, height: 160}} floated='left' src={props.book.imageLinks.smallThumbnail} />}
+          
           <Card.Meta  style={{fontSize: 14}}>
               <Header as='h5'>Authors:</Header>
               {props.book.authors === undefined ?
@@ -49,7 +46,7 @@ const BookCard = (props) => {
           {props.book.publishedDate === undefined ? 'not found' : props.book.publishedDate.substring(0,4) }
           </Card.Meta>
           <Card.Description>
-          <Rating icon='star' defaultRating={5} maxRating={5} />
+          <Rating disabled icon='star' defaultRating={Math.ceil(props.book.averageRating)} maxRating={5} />
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -70,6 +67,7 @@ const BookCard = (props) => {
               <Dropdown.Item onClick={(e, { value }) => props.updateBook(props.book, value)} value="currentlyReading" icon='book' selected={props.book.shelf === 'currentlyReading' ? true : false} text='Currently Reading' />
               <Dropdown.Item onClick={(e, { value }) => props.updateBook(props.book, value)} value="wantToRead" icon='book' selected={props.book.shelf === 'wantToRead' ? true : false} text='Want To Read' />
               <Dropdown.Item onClick={(e, { value }) => props.updateBook(props.book, value)} value="read" icon='book' selected={props.book.shelf === 'read' ? true : false} text='Read' />
+              <Dropdown.Item onClick={(e, { value }) => props.updateBook(props.book, value)} value="none" icon='book' selected={props.book.shelf === undefined ? true : false} text='None' />
             </Dropdown.Menu>
           </Dropdown>
           </div>
