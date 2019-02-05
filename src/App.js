@@ -26,13 +26,27 @@ class App extends Component {
   }
 
   updateBookList = (book, shelf) => {
-    console.log('oi')
+    console.log('entreiii')
     BooksAPI.update(book, shelf)
       .then(() => {
         book.shelf = shelf;
+        console.log('shelff', book.shelf);
         this.setState({books: this.state.books})
+        console.log('books', this.state.books);
       })
   }
+
+  updateBookList2 = (book, shelf) => {
+    console.log('entreiii')
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        book.shelf = shelf;
+        console.log('shelff', book.shelf);
+        this.setState((prevState)=>({books: [...this.state.books, book]})
+)        
+      })
+  }
+
 
   searchBook = (term) => {
     return BooksAPI.search(term)
@@ -86,7 +100,7 @@ class App extends Component {
           </Route>
       }
       <Route exact path='/search' render={() => (
-            <BookSearch teste = {this.updateBookList} searchBook={this.searchBook} />
+            <BookSearch teste = {this.updateBookList2} searchBook={this.searchBook} />
           )}>
           </Route>
       </div>
