@@ -16,17 +16,45 @@ class BookSearch extends Component {
 		}))
 		this.props.searchBook(query.trim()).then(books => {
 			this.setState(()=> ({
-				booksBySearch: books
+				booksBySearch: this.updateBookSearch(books)
 			}))
 		})
+    }
+
+    updateBookSearch =(books) => {
+        let books2 = this.props.bookList;
+        if(this.state.query === '' || books2.length === undefined || books.length === undefined){
+            return []
+        }
+        else{
+            let aux = books2.map( book => {
+                if(books.map( b => b.id).includes(book.id)){
+                    books[books.map(b2 => b2.id).indexOf(book.id)].shelf= book.shelf
+                }
+                return book;	
+            })
+        }
+        return books;
     }
 
     clearQuery = () => {
         this.updateQuery('')
     }
 
-    updateBook = ( book, shelf) => {
-        this.props.updateBook(book, shelf)
+    checkDuplicate = ( book, shelf) => {
+       
+        const books = this.state.booksBySearch;
+        const books2 = this.props.bookList;
+        if(books2.map( b => b.id).includes(book.id)){
+            console.log('entrouu')
+            this.props.teste2(book, shelf)
+        }
+        else{
+            console.log('aeho')
+            this.props.teste(book, shelf, books2.map( b => b.id).includes(book.id) )
+        }
+       
+        
     }
 
     render() {
@@ -34,7 +62,7 @@ class BookSearch extends Component {
             <Container style={{ marginTop: '7em' }}>
                 <Input value={this.state.query} onChange={(event) => this.updateQuery(event.target.value)} size='large' fluid icon='search' placeholder='Search a book' />
                 {this.state.booksBySearch !== undefined && this.state.booksBySearch.length >    0 ?
-                <BookList updateBook = {this.props.teste} category="Results:" bookList ={this.state.booksBySearch} /> :
+                <BookList updateBook = {this.checkDuplicate} category="Results:" bookList ={this.state.booksBySearch} /> :
                 ''
                 }
             </Container>

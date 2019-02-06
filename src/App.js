@@ -27,22 +27,18 @@ class App extends Component {
   updateBookList = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then(() => {
-        book.shelf = shelf;
-        this.setState({books: this.state.books})
+        //book.shelf = shelf;
+        //this.setState({books: this.state.books})
       })
   }
 
-  updateBookList2 = (book, shelf) => {
+  updateBookList2 = (book, shelf, duplicate) => {
     BooksAPI.update(book, shelf)
       .then(() => {
-        console.log('before', book.shelf);
-        const book2 = Object.assign({shelf:shelf}, book);
-        console.log('after', book2.shelf)
-        this.setState(()=>({books: [...this.state.books, book2]})
-)        
+        book.shelf = shelf;
+        this.setState({books: duplicate === true ? this.state.books : [...this.state.books, book]})
       })
   }
-
 
   searchBook = (term) => {
     return BooksAPI.search(term)
@@ -96,7 +92,7 @@ class App extends Component {
           </Route>
       }
       <Route exact path='/search' render={() => (
-            <BookSearch bookList={this.state.books} teste = {this.updateBookList2} searchBook={this.searchBook} />
+            <BookSearch bookList={this.state.books} teste = {this.updateBookList2} teste2={this.updateBookList2} searchBook={this.searchBook} />
           )}>
           </Route>
       </div>
