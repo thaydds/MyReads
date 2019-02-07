@@ -57,7 +57,7 @@ const BookCard = (props) => {
               <Dropdown.Divider />
               <Dropdown.Item onClick={(e, { value }) => sharing(`I ${props.book.shelf} ${props.book.title}`, value)} value='telegram' icon='telegram'  text='Telegram' />
               <Dropdown.Item onClick={(e, { value }) => sharing(`I ${props.book.shelf} ${props.book.title}`, value)} value='twitter' icon='twitter square' text='Twitter' />
-              <Dropdown.Item icon='google plus square' text='Google' />
+              <Dropdown.Item onClick={(e, { value }) => sharing(`I ${props.book.shelf} ${props.book.title}`, value)} icon='google plus square' text='Google' />
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown text='Move' floating labeled button icon='move' className='icon'>

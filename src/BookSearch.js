@@ -23,7 +23,9 @@ class BookSearch extends Component {
 
     updateBookSearch =(books) => {
         let books2 = this.props.bookList;
-        if(this.state.query === '' || books2.length === undefined || books.length === undefined){
+        console.log(books2)
+        console.log(books)
+        if(this.state.query === '' || books2.length === undefined || books === undefined || books.length === undefined){
             return []
         }
         else{
@@ -45,14 +47,9 @@ class BookSearch extends Component {
        
         const books = this.state.booksBySearch;
         const books2 = this.props.bookList;
-        if(books2.map( b => b.id).includes(book.id)){
-            console.log('entrouu')
-            this.props.teste2(book, shelf)
-        }
-        else{
-            console.log('aeho')
-            this.props.teste(book, shelf, books2.map( b => b.id).includes(book.id) )
-        }
+         this.props.teste(book, shelf, books2.map( b => b.id).includes(book.id))
+    
+  
        
         
     }
