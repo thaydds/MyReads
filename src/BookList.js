@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Card, Message} from 'semantic-ui-react'
+import Slider from "react-slick";
 
 import {
     Container,
@@ -23,11 +24,11 @@ class BookList extends Component {
                 <Message.Header>No book to show</Message.Header>
                 <p>move some book to here ;)</p>
             </Message>:
-            <Card.Group>
+                <Card.Group>
                 {this.props.bookList.map (book => {
                     return (<BookCard key={book.id} book={book} updateBook={this.updateBook}  />)
                 })}
-            </Card.Group>
+            </Card.Group>        
             }
             </Container>
             </div>

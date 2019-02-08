@@ -23,8 +23,7 @@ const BookCard = (props) => {
           <Card.Header textAlign='center'  style={{ marginBottom : '0.7em', height: 20, fontSize: 15  }}>{props.book.title}</Card.Header>
         </Card.Content>
         <Card.Content>
-          {props.book.imageLinks.smallThumbnail === undefined ? '' : <Image style={{width:100, height: 160}} floated='left' src={props.book.imageLinks.smallThumbnail} />}
-          
+          {props.book.imageLinks === undefined ? '' : <Image style={{width:100, height: 160}} floated='left' src={props.book.imageLinks.smallThumbnail} />}
           <Card.Meta  style={{fontSize: 14}}>
               <Header as='h5'>Authors:</Header>
               {props.book.authors === undefined ?

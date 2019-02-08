@@ -23,8 +23,6 @@ class BookSearch extends Component {
 
     updateBookSearch =(books) => {
         let books2 = this.props.bookList;
-        console.log(books2)
-        console.log(books)
         if(this.state.query === '' || books2.length === undefined || books === undefined || books.length === undefined){
             return []
         }
@@ -43,15 +41,10 @@ class BookSearch extends Component {
         this.updateQuery('')
     }
 
-    checkDuplicate = ( book, shelf) => {
-       
+    checkDuplicate = (book, shelf) => {
         const books = this.state.booksBySearch;
         const books2 = this.props.bookList;
-         this.props.teste(book, shelf, books2.map( b => b.id).includes(book.id))
-    
-  
-       
-        
+        this.props.teste(book, shelf, books2.map( b => b.id).includes(book.id))     
     }
 
     render() {
