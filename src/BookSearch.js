@@ -30,6 +30,7 @@ class BookSearch extends Component {
             let aux = books2.map( book => {
                 if(books.map( b => b.id).includes(book.id)){
                     books[books.map(b2 => b2.id).indexOf(book.id)].shelf= book.shelf
+                    console.log('1', books[books.map(b2 => b2.id).indexOf(book.id)].shelf= book.shelf)
                 }
                 return book;	
             })
@@ -44,10 +45,16 @@ class BookSearch extends Component {
     checkDuplicate = (book, shelf) => {
         const books = this.state.booksBySearch;
         const books2 = this.props.bookList;
-        this.props.teste(book, shelf, books2.map( b => b.id).includes(book.id))     
+        this.props.teste(book, shelf, books2.map( b => b.id).includes(book.id))
+        books[books.map(b => b.id).indexOf(book.id)].shelf= shelf
+        this.setState( () => ({
+            booksBySearch: books
+        }))
+            
     }
 
     render() {
+        //console.log('search', this.state.booksBySearch)
         return (
             <Container style={{ marginTop: '7em' }}>
                 <Input value={this.state.query} onChange={(event) => this.updateQuery(event.target.value)} size='large' fluid icon='search' placeholder='Search a book' />

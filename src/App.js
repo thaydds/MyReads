@@ -53,6 +53,7 @@ class App extends Component {
   }
 
   render() {
+    //console.log('books', this.state.books)
     const bookShelfs = [
       {
         title: 'Current Reading',

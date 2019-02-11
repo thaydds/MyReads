@@ -17,6 +17,7 @@ const sharing = (msg, socialMedia) =>{
 }
 
 const BookCard = (props) => {
+  //console.log('card', props.book)
     return(
       <Card>
         <Card.Content>
