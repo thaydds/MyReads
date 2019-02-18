@@ -1,11 +1,11 @@
 ## MyReads
 
-<img src="https://imgur.com/a/LLWKzTN" />
+<img src="https://i.imgur.com/USD415Y.png" />
 
-It's an app that simulatea a book shelf and allows to classify the books in three caregories: Current Reading, Want To Read and Read.
+It's an app that simulates a book shelf and allows to classify the books in three caregories: Current Reading, Want To Read and Read.
 
 The search only works with the term contained in the file terms.
-<img src="https://imgur.com/a/PwxTlMA" />
+<img src="https://i.imgur.com/U0VaftL.png" />
 
 ### Requirements :wrench:
 - Node.js >= v7.0.0
