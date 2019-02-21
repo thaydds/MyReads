@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Input, Container} from 'semantic-ui-react'
+import { Input, Container, Loader} from 'semantic-ui-react'
 import BookList from './BookList'
-//import {DebounceInput} from 'react-debo'
+import {DebounceInput} from 'react-debounce-input'
 
 
 class BookSearch extends Component {
@@ -30,7 +30,6 @@ class BookSearch extends Component {
             let aux = books2.map( book => {
                 if(books.map( b => b.id).includes(book.id)){
                     books[books.map(b2 => b2.id).indexOf(book.id)].shelf= book.shelf
-                    console.log('1', books[books.map(b2 => b2.id).indexOf(book.id)].shelf= book.shelf)
                 }
                 return book;	
             })
@@ -57,10 +56,19 @@ class BookSearch extends Component {
         //console.log('search', this.state.booksBySearch)
         return (
             <Container style={{ marginTop: '7em' }}>
-                <Input value={this.state.query} onChange={(event) => this.updateQuery(event.target.value)} size='large' fluid icon='search' placeholder='Search a book' />
+                <Input 
+                size='large' fluid 
+                icon='search' 
+                placeholder='Search a book' 
+                input={ <DebounceInput
+                    minLength={3}
+                    debounceTimeout={300}
+                    onChange={(event) => this.updateQuery(event.target.value)} 
+                    placeholder='Search a book'
+                    value={this.state.query}/>}/>
                 {this.state.booksBySearch !== undefined && this.state.booksBySearch.length >    0 ?
                 <BookList updateBook = {this.checkDuplicate} category="Results:" bookList ={this.state.booksBySearch} /> :
-                ''
+                <Loader active />
                 }
             </Container>
         )

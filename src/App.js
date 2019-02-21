@@ -4,7 +4,8 @@ import BookSearch from './BookSearch'
 import {
   Container,
   Image,
-  Menu
+  Menu,
+  Loader
 } from 'semantic-ui-react'
 import * as BooksAPI from './BooksAPI'
 import { Route, Link } from 'react-router-dom'
@@ -81,7 +82,7 @@ class App extends Component {
           </Menu.Item>
         </Container>
         </Menu>
-        {this.state.books.length === 0 ? ''
+        {this.state.books.length === 0 ? <Loader active />
           :
           <Route exact path='/' render={() => (
             <div>
