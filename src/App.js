@@ -12,7 +12,7 @@ import { Route, Link } from 'react-router-dom'
 class App extends Component {
   state = {
     url: '',
-    books: undefined
+    books: []
   }
 
   componentWillMount() {
@@ -27,14 +27,13 @@ class App extends Component {
   updateBookList = (book, shelf, duplicate) => {
     BooksAPI.update(book, shelf)
       .then(() => {
-        let newBooks = [...this.state.books]
-        newBooks = newBooks.map(b => {
-          if(b.id == book.id){
-            b.shelf = shelf
+        let newBooks = this.state.books.map( b => {
+          if(b.id === book.id){
+             b.shelf = shelf
           }
-          return b
+          return b;
         })
-
+        
         if(duplicate === true || duplicate === undefined){
           this.setState({books: newBooks});
         }
@@ -53,7 +52,7 @@ class App extends Component {
   }
 
   render() {
-    //console.log('books', this.state.books)
+   console.log('this.state.books.length', this.state.books.length);
     const bookShelfs = [
       {
         title: 'Current Reading',
@@ -82,7 +81,7 @@ class App extends Component {
           </Menu.Item>
         </Container>
         </Menu>
-        {this.state.books === undefined ? ''
+        {this.state.books.length === 0 ? ''
           :
           <Route exact path='/' render={() => (
             <div>
