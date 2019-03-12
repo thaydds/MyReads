@@ -22,17 +22,18 @@ class BookSearch extends Component {
     }
 
     updateBookSearch =(books) => {
-        let books2 = this.props.bookList;
-        if(this.state.query === '' || books2.length === undefined || books === undefined || books.length === undefined){
+        let booksClone = this.props.bookList;
+        if(this.state.query === '' || booksClone.length === undefined || books === undefined || books.length === undefined){
             return []
         }
         else{
-            let aux = books2.map( book => {
-                if(books.map( b => b.id).includes(book.id)){
-                    books[books.map(b2 => b2.id).indexOf(book.id)].shelf= book.shelf
-                }
-                return book;	
-            })
+
+            booksClone.forEach(book => {
+               if(books.find(b => b.id ==- book.id)){
+                books[books.map(b2 => b2.id)
+                    .indexOf(book.id)].shelf= book.shelf
+               } 
+            });
         }
         return books;
     }
@@ -41,10 +42,10 @@ class BookSearch extends Component {
         this.updateQuery('')
     }
 
-    checkDuplicate = (book, shelf) => {
+    updateBooks = (book, shelf) => {
         const books = this.state.booksBySearch;
-        const books2 = this.props.bookList;
-        this.props.teste(book, shelf, books2.map( b => b.id).includes(book.id))
+        const booksClone = this.props.bookList;
+        this.props.teste(book, shelf, booksClone.map( b => b.id).includes(book.id))
         books[books.map(b => b.id).indexOf(book.id)].shelf= shelf
         this.setState( () => ({
             booksBySearch: books
@@ -53,7 +54,6 @@ class BookSearch extends Component {
     }
 
     render() {
-        //console.log('search', this.state.booksBySearch)
         return (
             <Container style={{ marginTop: '7em' }}>
                 <Input 
@@ -62,13 +62,13 @@ class BookSearch extends Component {
                 placeholder='Search a book' 
                 input={ <DebounceInput
                     minLength={3}
-                    debounceTimeout={300}
+                    debounceTimeout={100}
                     onChange={(event) => this.updateQuery(event.target.value)} 
                     placeholder='Search a book'
                     value={this.state.query}/>}/>
                 {this.state.booksBySearch !== undefined && this.state.booksBySearch.length >    0 ?
-                <BookList updateBook = {this.checkDuplicate} category="Results:" bookList ={this.state.booksBySearch} /> :
-                <Loader active />
+                <BookList updateBook = {this.updateBooks} category="Results:" bookList ={this.state.booksBySearch} /> :
+                ''
                 }
             </Container>
         )

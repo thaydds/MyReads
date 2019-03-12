@@ -53,7 +53,7 @@ class App extends Component {
   }
 
   render() {
-   console.log('this.state.books.length', this.state.books.length);
+
     const bookShelfs = [
       {
         title: 'Current Reading',
